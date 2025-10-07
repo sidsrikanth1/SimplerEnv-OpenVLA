@@ -24,6 +24,8 @@ class OpenPiFastInference:
         image_size: list[int] = [224, 224],
         action_scale: float = 1.0,
         action_ensemble_temp: float = -0.8,
+        host: str = "0.0.0.0",
+        port: int = 8000
     ) -> None:
         gpu_idx = os.environ.get("GPU_IDX", 0)
         self.device = f"cuda:{gpu_idx}"
@@ -50,8 +52,6 @@ class OpenPiFastInference:
         print(f"*** policy_setup: {policy_setup}, unnorm_key: {unnorm_key} ***")
 
         # TODO: add pi-fast loading ...
-        host: str = "0.0.0.0"
-        port: int = 8000
         self.policy_client = _websocket_client_policy.WebsocketClientPolicy(host, port)
 
         self.image_size = image_size
